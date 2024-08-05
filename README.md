@@ -38,6 +38,7 @@ cd autodocker/ && nohup python3.10 controller.py  &
 ## Test
 Enable Jmeter GUI, test with url: http://xx.xx.xx.xx:8088/system_info
 You will see the docker scall up and down accrdingly. 
+![image-docker-compose](https://github.com/user-attachments/assets/f53e5f38-6e9c-45ab-82d0-4a37ac10111e)
 
 
 # TODO:
