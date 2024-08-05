@@ -1,5 +1,12 @@
 # Project Setup Guide
 
+## Architecture design
+
+Considering the requirement to avoid using Kubernetes and only use docker-compose, we can utilize Prometheus' monitoring capabilities combined with webhooks. This approach will call server-side APIs to trigger docker-compose scale. This forms the core principle of this version.
+
+![WX20240805-202220@2x](https://github.com/user-attachments/assets/cef7a104-a489-43a9-ae75-7b51832430f6)
+
+
 ## Install Docker Compose
 
 ```sh
