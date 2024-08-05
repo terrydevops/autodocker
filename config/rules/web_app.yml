@@ -1,0 +1,30 @@
+groups:
+- name: AutoScaling 
+  rules:
+  - alert: ScaleUp
+    expr: avg((container_memory_rss{container_label_com_docker_compose_service="webapp"} / container_spec_memory_limit_bytes{container_label_com_docker_compose_service="webapp"})  * 100) > 78
+    for: 10s
+    labels:
+      user: prometheus
+      severity: warning
+      action: AutoScaling
+
+
+- name: Service exception 50x
+  rules:
+  - alert: Service exception 50x
+    expr: http_response_status_total{job="web-app",status_code=~"50.*"} > 0
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
+
+
+- name: The request time exceeds 1 second
+  rules:
+  - alert: The request time exceeds 1 second
+    expr: sum by (le) (rate(http_request_duration_seconds_bucket{job="web-app", le="+Inf"}[1m]) - rate(http_request_duration_seconds_bucket{job="web-app", le="1.0"}[1m])) > 0
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
