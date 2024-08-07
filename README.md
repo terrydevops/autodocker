@@ -10,13 +10,13 @@ Considering the requirement to avoid using Kubernetes and only use docker-compos
 ## Install Docker Compose
 
 ```sh
-curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ## Change Alertmanager Webhook Address
 
-Open the app/config/alertmanager.yml file and update the webhook address. For example:
+Open the config/alertmanager.yml file and update the webhook address. For example:
 
 ```sh
 receivers:
@@ -25,21 +25,25 @@ receivers:
       - url: 'http://new-webhook-address'
 ```
 
-## Start the Web App
-```sh
-cd autodocker/
-docker-compose up -d
-```
+
 ## Enable the Controller
 This controller is a key compoent running as webhook for alertmangerxss 
 ```sh
 sudo apt update
-sudo apt install -y python3.10 python3-pip
-apt install python3.10-venv #for MacOS
+sudo apt install -y python3 python3-pip
+sudo apt install python3.12-venv 
 python3 -m venv myenv
 source myenv/bin/activate
 pip3 install Flask python_on_whales
-cd autodocker/ && nohup python3.10 controller.py  &
+nohup python3 controller.py  &
+```
+
+## Start the Web App
+```sh
+sudo apt install docker.io
+sudo systemctl start docker
+cd autodocker/
+sudo docker-compose up -d
 ```
 
 ## Test
