@@ -42,6 +42,7 @@ nohup python3 controller.py  &
 ```sh
 sudo apt install docker.io
 sudo systemctl start docker
+export PWD=$(pwd)
 cd autodocker/
 sudo docker-compose up -d
 ```
